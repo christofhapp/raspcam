@@ -56,7 +56,7 @@ if __name__ == '__main__':
 
     path = '/home/pi/Desktop/Fotos/'
 
-    for i in range(20):
+    for i in range(100):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))

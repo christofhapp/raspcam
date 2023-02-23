@@ -53,6 +53,7 @@ if __name__ == '__main__':
 
     cv2.namedWindow('image', cv2.WINDOW_FULLSCREEN)
 
+    print('max exposuretime: ',cam.ExposureTime.GetMax())
 
     path = '/home/pi/Desktop/Fotos/'
 
@@ -62,13 +63,31 @@ if __name__ == '__main__':
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
-        if datetime.now()-t0 > timedelta(seconds=60):
-            t0 = datetime.now()
-            cv2.imwrite(path + zeit + '.png', img)
-            print(zeit+'.png saved')
+
+        input()
+
+        #if datetime.now()-t0 > timedelta(seconds=60):
+        #    t0 = datetime.now()
+        #    cv2.imwrite(path + zeit + '.png', img)
+        #    print(zeit+'.png saved')
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break
+        elif wk == ord('1'):
+            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
+            exposure_time_to_set = 1e6
+            cam.ExposureTime.SetValue(exposure_time_to_set)
+        elif wk == ord('0'):
+            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Continuous)
+        elif wk == ord('2'):
+            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
+            exposure_time_to_set = 2e6
+            cam.ExposureTime.SetValue(exposure_time_to_set)
+        elif wk == ord('9'):
+            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
+            exposure_time_to_set = 9e6
+            cam.ExposureTime.SetValue(exposure_time_to_set)
+
         #time.sleep(2)
 
     clear(cam)

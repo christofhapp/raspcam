@@ -64,8 +64,6 @@ if __name__ == '__main__':
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
 
-        input()
-
         #if datetime.now()-t0 > timedelta(seconds=60):
         #    t0 = datetime.now()
         #    cv2.imwrite(path + zeit + '.png', img)
@@ -73,20 +71,19 @@ if __name__ == '__main__':
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break
-        elif wk == ord('1'):
-            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
-            exposure_time_to_set = 1e6
-            cam.ExposureTime.SetValue(exposure_time_to_set)
-        elif wk == ord('0'):
+
+        inp = input('exposure time in ms:')
+
+        if inp == '0':
             cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Continuous)
-        elif wk == ord('2'):
+
+        else:
             cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
-            exposure_time_to_set = 2e6
+            exposure_time_to_set = float(inp)*1e3
             cam.ExposureTime.SetValue(exposure_time_to_set)
-        elif wk == ord('9'):
-            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
-            exposure_time_to_set = 9e6
-            cam.ExposureTime.SetValue(exposure_time_to_set)
+
+
+
 
         #time.sleep(2)
 

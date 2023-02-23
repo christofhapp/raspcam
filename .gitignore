@@ -1,0 +1,6 @@
+*.jpg
+*.pyc
+*.xml
+.idea/
+venv/
+packages/

@@ -50,7 +50,7 @@ if __name__ == '__main__':
 
     cam = init()
 
-    cv2.namedWindow('camLWIR', cv2.WINDOW_KEEPRATIO)
+    cv2.namedWindow('image', cv2.WINDOW_FULLSCREEN)
 
 
     path = '/home/pi/Desktop/Fotos/'

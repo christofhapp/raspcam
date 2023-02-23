@@ -28,6 +28,10 @@ def init():
         if PySpin.IsWritable(cam.SensorShutterMode):
             cam.SensorShutterMode.SetValue(PySpin.SensorShutterMode_Rolling)  # Rolling, GlobalReset GlobalReset: schafft AutoExposure nicht
 
+        cam.TriggerMode.SetValue(PySpin.TriggerMode_On)
+        cam.TriggerSource.SetValue(PySpin.TriggerSource_Software)
+        cam.BeginAcquisition()
+
     return cam
 
 def getPic(cam):

@@ -1,6 +1,6 @@
 import PySpin
 import cv2
-from datetime import datetime
+from datetime import datetime, timedelta
 import os
 import time
 
@@ -56,13 +56,16 @@ if __name__ == '__main__':
 
     path = '/home/pi/Desktop/Fotos/'
 
+    t0 = datetime.now()
     for i in range(100):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
-        imgKlein = cv2.resize(img, (320, 240))
+        imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
-        #cv2.imwrite(path + zeit + '.png', img)
-        print(zeit+'.png saved')
+        if datetime.now()-t0 > timedelta(seconds=60):
+            t0 = datetime.now()
+            cv2.imwrite(path + zeit + '.png', img)
+            print(zeit+'.png saved')
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break

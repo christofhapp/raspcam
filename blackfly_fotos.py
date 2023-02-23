@@ -17,6 +17,7 @@ def init():
 
         try:
             cam = BFcamlist.GetBySerial(serialRGB)
+            cam.Init()
             if cam.DeviceSerialNumber() == serialRGB:
                 print('Cam RGB initialized')
         except PySpin.SpinnakerException as ex:

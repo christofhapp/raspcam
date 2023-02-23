@@ -56,17 +56,17 @@ if __name__ == '__main__':
 
     path = '/home/pi/Desktop/Fotos/'
 
-    for i in range(3):
+    for i in range(20):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
-        cv2.imwrite(path + zeit + '.png', img)
+        #cv2.imwrite(path + zeit + '.png', img)
         print(zeit+'.png saved')
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break
-        time.sleep(2)
+        #time.sleep(2)
 
     clear(cam)
     cv2.destroyAllWindows()

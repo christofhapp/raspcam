@@ -2,6 +2,7 @@ import PySpin
 import cv2
 from datetime import datetime
 import os
+import time
 
 def init():
     if 'BFsys' not in globals():
@@ -55,7 +56,7 @@ if __name__ == '__main__':
 
     path = '/home/pi/Desktop/Fotos/'
 
-    for i in range(10):
+    for i in range(3):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
@@ -65,6 +66,7 @@ if __name__ == '__main__':
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break
+        time.sleep(2)
 
     clear(cam)
     cv2.destroyAllWindows()

@@ -59,7 +59,7 @@ if __name__ == '__main__':
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
-        cv2.imshow('image', img)
+        cv2.imshow('image', imgKlein)
         cv2.imwrite(path + zeit + '.png', img)
         print(zeit+'.png saved')
         wk = cv2.waitKey(1)

@@ -59,7 +59,7 @@ if __name__ == '__main__':
     for i in range(100):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
-        imgKlein = cv2.resize(img, (640, 480))
+        imgKlein = cv2.resize(img, (320, 240))
         cv2.imshow('image', imgKlein)
         #cv2.imwrite(path + zeit + '.png', img)
         print(zeit+'.png saved')

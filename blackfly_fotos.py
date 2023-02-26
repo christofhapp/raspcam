@@ -32,6 +32,7 @@ def init():
         cam.TriggerMode.SetValue(PySpin.TriggerMode_On)
         cam.TriggerSource.SetValue(PySpin.TriggerSource_Software)
         cam.BeginAcquisition()
+        cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Continuous)
 
     return cam
 
@@ -53,34 +54,34 @@ if __name__ == '__main__':
 
     cv2.namedWindow('image', cv2.WINDOW_FULLSCREEN)
 
-    print('max exposuretime: ',cam.ExposureTime.GetMax())
+    #print('max exposuretime: ',cam.ExposureTime.GetMax())
 
     path = '/home/pi/Desktop/Fotos/'
 
     t0 = datetime.now()
-    for i in range(100):
+    for i in range(100000):
         img = getPic(cam)
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
 
-        #if datetime.now()-t0 > timedelta(seconds=60):
-        #    t0 = datetime.now()
-        #    cv2.imwrite(path + zeit + '.png', img)
-        #    print(zeit+'.png saved')
+        if datetime.now()-t0 > timedelta(seconds=60):
+            t0 = datetime.now()
+            cv2.imwrite(path + zeit + '.png', img)
+            print(zeit+'.png saved')
         wk = cv2.waitKey(1)
         if wk == ord('q'):
             break
 
-        inp = input('exposure time in ms:')
+        #inp = input('exposure time in ms:')
 
-        if inp == '0':
-            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Continuous)
+        #if inp == '0':
+        #    cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Continuous)
 
-        else:
-            cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
-            exposure_time_to_set = float(inp)*1e3
-            cam.ExposureTime.SetValue(exposure_time_to_set)
+        #else:
+        #    cam.ExposureAuto.SetValue(PySpin.ExposureAuto_Off)
+        #    exposure_time_to_set = float(inp)*1e3
+        #    cam.ExposureTime.SetValue(exposure_time_to_set)
 
 
 

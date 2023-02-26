@@ -65,7 +65,7 @@ if __name__ == '__main__':
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
 
-        if datetime.now()-t0 > timedelta(seconds=60):
+        if datetime.now()-t0 > timedelta(seconds=20):
             t0 = datetime.now()
             cv2.imwrite(path + zeit + '.png', img)
             print(zeit+'.png saved')

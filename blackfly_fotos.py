@@ -41,12 +41,14 @@ def init():
     return cam
 
 def getPic():
+    global cam
     cam.TriggerSoftware.Execute()
     img_result = cam.GetNextImage()
     img = img_result.Convert(PySpin.PixelFormat_BGR8)
     return img.GetNDArray()
 
 def clear():
+    global cam
     cam.EndAcquisition()
     cam.TriggerMode.SetValue(PySpin.TriggerMode_Off)
     cam.DeInit()

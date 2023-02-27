@@ -3,6 +3,10 @@ import cv2
 from datetime import datetime, timedelta
 import os
 import time
+import signal
+
+
+
 
 def init():
     if 'BFsys' not in globals():
@@ -36,19 +40,29 @@ def init():
 
     return cam
 
-def getPic(cam):
+def getPic():
     cam.TriggerSoftware.Execute()
     img_result = cam.GetNextImage()
     img = img_result.Convert(PySpin.PixelFormat_BGR8)
     return img.GetNDArray()
 
-def clear(cam):
+def clear():
     cam.EndAcquisition()
     cam.TriggerMode.SetValue(PySpin.TriggerMode_Off)
     cam.DeInit()
+    del cam
+    print('cam cleared!')
+
+
+signal.signal(signal.SIGINT, clear)
+signal.signal(signal.SIGTERM, clear)
+signal.signal(signal.SIGABRT, clear)
+signal.signal(signal.SIGSEGV, clear)
 
 # Press the green button in the gutter to run the script.
 if __name__ == '__main__':
+
+    global cam
 
     cam = init()
 
@@ -60,7 +74,7 @@ if __name__ == '__main__':
 
     t0 = datetime.now()
     for i in range(100000):
-        img = getPic(cam)
+        img = getPic()
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
         imgKlein = cv2.resize(img, (640, 480))
         cv2.imshow('image', imgKlein)
@@ -88,7 +102,8 @@ if __name__ == '__main__':
 
         #time.sleep(2)
 
-    clear(cam)
+    clear()
+
     cv2.destroyAllWindows()
 
     #while True:

@@ -49,7 +49,7 @@ def getPic():
     return img.GetNDArray()
 
 def clear():
-    global cam
+    global cam, BFsys, BFcamlist
     cam.EndAcquisition()
     cam.TriggerMode.SetValue(PySpin.TriggerMode_Off)
     cam.DeInit()

@@ -9,6 +9,7 @@ import signal
 
 
 def init():
+    global BFsys, BFcamlist
     if 'BFsys' not in globals():
         try:
             global BFsys, BFcamlist
@@ -53,7 +54,9 @@ def clear():
     cam.TriggerMode.SetValue(PySpin.TriggerMode_Off)
     cam.DeInit()
     del cam
-    print('cam cleared!')
+    BFcamlist.Clear()
+    BFsys.ReleaseInstance()
+    print('cam cleared! camlist cleared! BFsys released!')
 
 
 signal.signal(signal.SIGINT, clear)

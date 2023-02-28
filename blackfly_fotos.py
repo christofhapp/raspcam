@@ -81,7 +81,7 @@ if __name__ == '__main__':
     for i in range(100000):
         img = getPic()
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
-        factor = 1
+        factor = 4
         height, width, layers = img.shape
         size = (width, height)
         size = (round(size[0] / factor), round(size[1] / factor))
@@ -91,7 +91,7 @@ if __name__ == '__main__':
         cv2.imshow('image', imgScreen)
 
 
-        if datetime.now()-t0 > timedelta(seconds=10):
+        if datetime.now()-t0 > timedelta(seconds=20):
             t0 = datetime.now()
             cv2.imwrite(path + zeit + '.png', imgSave)
             print(zeit+'.png saved')

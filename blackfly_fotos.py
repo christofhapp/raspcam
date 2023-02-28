@@ -81,12 +81,19 @@ if __name__ == '__main__':
     for i in range(100000):
         img = getPic()
         zeit = datetime.now().strftime("%Y-%m-%d--%H-%M-%S")
-        imgKlein = cv2.resize(img, (640, 480))
-        cv2.imshow('image', imgKlein)
+        factor = 10
+        height, width, layers = img.shape
+        size = (width, height)
+        size = (round(size[0] / factor), round(size[1] / factor))
+        imgSave = cv2.resize(img, size)
+
+        imgScreen = cv2.resize(img, (640, 480))
+        cv2.imshow('image', imgScreen)
+
 
         if datetime.now()-t0 > timedelta(seconds=20):
             t0 = datetime.now()
-            cv2.imwrite(path + zeit + '.png', img)
+            cv2.imwrite(path + zeit + '.png', imgSave)
             print(zeit+'.png saved')
         wk = cv2.waitKey(1)
         if wk == ord('q'):

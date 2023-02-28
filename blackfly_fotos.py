@@ -91,7 +91,7 @@ if __name__ == '__main__':
         cv2.imshow('image', imgScreen)
 
 
-        if datetime.now()-t0 > timedelta(seconds=20):
+        if datetime.now()-t0 > timedelta(seconds=10):
             t0 = datetime.now()
             cv2.imwrite(path + zeit + '.png', imgSave)
             print(zeit+'.png saved')
